@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.spiritblast1.2.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\mbahen10\\Documents\\GitHub\\SpiritBlast\\SpiritBlastNew\\spiritblast1.2\\actions.json",
+      "action_manifest_path": "C:\\Users\\mbahen10\\Documents\\GitHub\\SpiritBlast\\SpiritBlastNew\\spiritblast1.3\\actions.json",
       "strings": {
         "en_us": {
           "name": "spiritblast1.2 [Testing]"
