@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.michaelsspiritblastversion.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\mbahen10\\Desktop\\MichaelsSpritBlast\\MichaelsSpiritBlastVersion\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "MichaelsSpiritBlastVersion [Testing]"
+        }
+      }
+    }
+  ]
+}
