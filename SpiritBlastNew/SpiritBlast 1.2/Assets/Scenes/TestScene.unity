@@ -539,7 +539,11 @@ Prefab:
       propertyPath: m_Mesh
       value: 
 <<<<<<< HEAD
+<<<<<<< HEAD
       objectReference: {fileID: 371988840}
+=======
+      objectReference: {fileID: 1988186175}
+>>>>>>> parent of e4528b0... Flight!
 =======
       objectReference: {fileID: 1988186175}
 >>>>>>> parent of e4528b0... Flight!
@@ -548,7 +552,11 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
 <<<<<<< HEAD
+<<<<<<< HEAD
       objectReference: {fileID: 218602460}
+=======
+      objectReference: {fileID: 1839956132}
+>>>>>>> parent of e4528b0... Flight!
 =======
       objectReference: {fileID: 1839956132}
 >>>>>>> parent of e4528b0... Flight!
@@ -738,6 +746,7 @@ Transform:
     type: 3}
   m_PrefabInternal: {fileID: 192315569}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!21 &218602460
 Material:
   serializedVersion: 6
@@ -926,6 +935,8 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
+=======
+>>>>>>> parent of e4528b0... Flight!
 --- !u!1001 &416649819
 >>>>>>> parent of e4528b0... Flight!
 =======

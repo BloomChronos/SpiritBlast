@@ -8,7 +8,10 @@ public class VRInputModule : BaseInputModule
 {
     //Inputs
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of e4528b0... Flight!
     public GameObject camRig;
     public Camera player;
 >>>>>>> parent of e4528b0... Flight!
