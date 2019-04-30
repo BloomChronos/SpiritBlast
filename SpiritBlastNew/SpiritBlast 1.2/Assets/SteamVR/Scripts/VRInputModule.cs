@@ -9,12 +9,15 @@ public class VRInputModule : BaseInputModule
     //Inputs
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of e4528b0... Flight!
     public GameObject camRig;
     public Camera player;
 >>>>>>> parent of e4528b0... Flight!
+=======
+>>>>>>> parent of b9c32a8... Flight Code
     public Camera m_Camera;
     public SteamVR_Input_Sources m_TargetSource;
     public SteamVR_Input_Sources m_FireSource;
@@ -27,11 +30,14 @@ public class VRInputModule : BaseInputModule
     private PointerEventData m_Data = null;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     //Flight Variables
     public float moveSpeed = 10.5f;
 
 >>>>>>> parent of e4528b0... Flight!
+=======
+>>>>>>> parent of b9c32a8... Flight Code
     //Lazer Variables
     public float fireRate = 0.25f;
     public float weaponRange = 50.0f;
@@ -84,6 +90,7 @@ public class VRInputModule : BaseInputModule
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         //Controller Fly
         if (m_FlyAction.GetLastStateDown(m_FlySource))
@@ -113,6 +120,8 @@ public class VRInputModule : BaseInputModule
         }
 
 >>>>>>> parent of e4528b0... Flight!
+=======
+>>>>>>> parent of b9c32a8... Flight Code
         //Press
         if (m_ClickAction.GetStateDown(m_TargetSource))
             ProcessPress(m_Data);
