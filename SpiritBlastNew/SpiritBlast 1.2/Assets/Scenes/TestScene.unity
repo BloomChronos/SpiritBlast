@@ -908,6 +908,7 @@ Prefab:
 GameObject:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_CorrespondingSourceObject: {fileID: 100000, guid: efe75a4212a506f4db4af2c578b7ade6,
     type: 3}
   m_PrefabInternal: {fileID: 1538788174}
@@ -926,6 +927,8 @@ MeshCollider:
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 0}
 =======
+=======
+>>>>>>> parent of e4528b0... Flight!
 =======
 >>>>>>> parent of e4528b0... Flight!
   m_CorrespondingSourceObject: {fileID: 1665581547448630, guid: 92fbf8d5d77468f4fafdae52e5cd6626,
