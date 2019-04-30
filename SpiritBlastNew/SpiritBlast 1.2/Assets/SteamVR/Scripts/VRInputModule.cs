@@ -7,16 +7,23 @@ using UnityEngine.EventSystems;
 public class VRInputModule : BaseInputModule
 {
     //Inputs
+    public GameObject camRig;
+    public Camera player;
     public Camera m_Camera;
     public SteamVR_Input_Sources m_TargetSource;
     public SteamVR_Input_Sources m_FireSource;
+    public SteamVR_Input_Sources m_FlySource;
     public SteamVR_Action_Boolean m_ClickAction;
     public SteamVR_Action_Boolean m_FireAction;
+    public SteamVR_Action_Boolean m_FlyAction;
 
     //Data Variables
     private GameObject m_CurrentObject = null;
     private GameObject m_LazerHit = null;
     private PointerEventData m_Data = null;
+
+    //Flight Variables
+    public float moveSpeed = 10.5f;
 
     //Lazer Variables
     public float fireRate = 0.25f;
@@ -67,6 +74,33 @@ public class VRInputModule : BaseInputModule
             {
                 Destroy(m_CurrentObject);
             }
+        }
+
+        //Controller Fly
+        if (m_FlyAction.GetLastStateDown(m_FlySource))
+        {
+            Debug.Log("Foward!");
+            Quaternion orientation = player.transform.rotation;
+            Vector3 moveDirection = orientation * Vector3.forward;
+            Vector3 pos = player.transform.position;
+            pos += moveDirection * moveSpeed * Time.deltaTime;
+            player.transform.position = pos;
+
+            Quaternion rigOrientation = camRig.transform.rotation;
+            Vector3 rigPos = camRig.transform.position;
+            rigPos += moveDirection * moveSpeed * Time.deltaTime;
+            camRig.transform.position = rigPos;
+        }
+
+        //Fly
+        if (Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("Foward!");
+            Quaternion orientation = player.transform.rotation;
+            Vector3 moveDirection = orientation * Vector3.forward;
+            Vector3 pos = player.transform.position;
+            pos += moveDirection * moveSpeed * Time.deltaTime;
+            player.transform.position = pos;
         }
 
         //Press
