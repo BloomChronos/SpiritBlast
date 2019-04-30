@@ -7,6 +7,11 @@ using UnityEngine.EventSystems;
 public class VRInputModule : BaseInputModule
 {
     //Inputs
+<<<<<<< HEAD
+=======
+    public GameObject camRig;
+    public Camera player;
+>>>>>>> parent of e4528b0... Flight!
     public Camera m_Camera;
     public SteamVR_Input_Sources m_TargetSource;
     public SteamVR_Input_Sources m_FireSource;
@@ -18,6 +23,12 @@ public class VRInputModule : BaseInputModule
     private GameObject m_LazerHit = null;
     private PointerEventData m_Data = null;
 
+<<<<<<< HEAD
+=======
+    //Flight Variables
+    public float moveSpeed = 10.5f;
+
+>>>>>>> parent of e4528b0... Flight!
     //Lazer Variables
     public float fireRate = 0.25f;
     public float weaponRange = 50.0f;
@@ -69,6 +80,36 @@ public class VRInputModule : BaseInputModule
             }
         }
 
+<<<<<<< HEAD
+=======
+        //Controller Fly
+        if (m_FlyAction.GetLastStateDown(m_FlySource))
+        {
+            Debug.Log("Foward!");
+            Quaternion orientation = player.transform.rotation;
+            Vector3 moveDirection = orientation * Vector3.forward;
+            Vector3 pos = player.transform.position;
+            pos += moveDirection * moveSpeed * Time.deltaTime;
+            player.transform.position = pos;
+
+            Quaternion rigOrientation = camRig.transform.rotation;
+            Vector3 rigPos = camRig.transform.position;
+            rigPos += moveDirection * moveSpeed * Time.deltaTime;
+            camRig.transform.position = rigPos;
+        }
+
+        //Fly
+        if (Input.GetKey(KeyCode.W))
+        {
+            Debug.Log("Foward!");
+            Quaternion orientation = player.transform.rotation;
+            Vector3 moveDirection = orientation * Vector3.forward;
+            Vector3 pos = player.transform.position;
+            pos += moveDirection * moveSpeed * Time.deltaTime;
+            player.transform.position = pos;
+        }
+
+>>>>>>> parent of e4528b0... Flight!
         //Press
         if (m_ClickAction.GetStateDown(m_TargetSource))
             ProcessPress(m_Data);
