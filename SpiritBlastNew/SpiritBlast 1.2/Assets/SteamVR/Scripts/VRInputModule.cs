@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class VRInputModule : BaseInputModule
 {
     //Inputs
-    public GameObject camRig;
+    public Transform camRig;
     public Camera player;
     public Camera m_Camera;
     public SteamVR_Input_Sources m_TargetSource;
@@ -23,7 +23,7 @@ public class VRInputModule : BaseInputModule
     private PointerEventData m_Data = null;
 
     //Flight Variables
-    public float moveSpeed = 10.5f;
+    public float moveSpeed = 0.0001f;
 
     //Lazer Variables
     public float fireRate = 0.25f;
@@ -77,31 +77,32 @@ public class VRInputModule : BaseInputModule
         }
 
         //Controller Fly
-        if (m_FlyAction.GetLastStateDown(m_FlySource))
+        if (m_FlyAction.GetLastState(m_FlySource))
         {
             Debug.Log("Foward!");
             Quaternion orientation = player.transform.rotation;
-            Vector3 moveDirection = orientation * Vector3.forward;
-            Vector3 pos = player.transform.position;
-            pos += moveDirection * moveSpeed * Time.deltaTime;
-            player.transform.position = pos;
+            //Vector3 moveDirection = rigOrientation * Vector3.forward;
+            //Vector3 pos = player.transform.position;
+            //pos += moveDirection * moveSpeed * Time.deltaTime;
+            //player.transform.position = pos;
 
             Quaternion rigOrientation = camRig.transform.rotation;
+            Vector3 moveDirection = orientation * Vector3.forward;
             Vector3 rigPos = camRig.transform.position;
-            rigPos += moveDirection * moveSpeed * Time.deltaTime;
+            rigPos += (moveDirection * moveSpeed) / 40;
             camRig.transform.position = rigPos;
         }
 
         //Fly
-        if (Input.GetKey(KeyCode.W))
-        {
-            Debug.Log("Foward!");
-            Quaternion orientation = player.transform.rotation;
-            Vector3 moveDirection = orientation * Vector3.forward;
-            Vector3 pos = player.transform.position;
-            pos += moveDirection * moveSpeed * Time.deltaTime;
-            player.transform.position = pos;
-        }
+        //if (Input.GetKey(KeyCode.W))
+        //{
+        //    Debug.Log("Foward!");
+        //    Quaternion orientation = player.transform.rotation;
+        //    Vector3 moveDirection = orientation * Vector3.forward;
+        //    Vector3 pos = player.transform.position;
+        //    pos += moveDirection * moveSpeed * Time.deltaTime;
+        //    player.transform.position = pos;
+        //}
 
         //Press
         if (m_ClickAction.GetStateDown(m_TargetSource))
