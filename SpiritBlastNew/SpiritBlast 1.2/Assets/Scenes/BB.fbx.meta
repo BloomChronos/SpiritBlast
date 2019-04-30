@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73d2f6759078ba742a1fcc5a448a7cc0
+guid: efe75a4212a506f4db4af2c578b7ade6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -50,6 +50,8 @@ ModelImporter:
     400042: pCylinder1
     400044: pCylinder2
     2100000: lambert1
+    2100002: lambert6
+    2100004: road
     2300000: door
     2300002: door1
     2300004: door2
@@ -121,7 +123,7 @@ ModelImporter:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
