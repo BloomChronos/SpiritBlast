@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.vrtesting.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\dyonamin\\Desktop\\VRTesting\\VRTesting\\actions.json",
+      "action_manifest_path": "C:\\Users\\dyonamin\\Desktop\\SpiritBlast\\OurGame\\SpiritBlast 1.1\\SpiritBlast\\actions.json",
       "strings": {
         "en_us": {
           "name": "VRTesting [Testing]"
