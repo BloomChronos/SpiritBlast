@@ -76,6 +76,19 @@ public class VRInputModule : BaseInputModule
             }
         }
 
+        //Fire
+        if (Input.GetKey(KeyCode.Space))
+        {
+            nextFire = Time.time + fireRate;
+
+            ProcessFire();
+
+            if (m_CurrentObject != null)
+            {
+                Destroy(m_CurrentObject);
+            }
+        }
+
         //Controller Fly
         if (m_FlyAction.GetState(m_FlySource))
         {
