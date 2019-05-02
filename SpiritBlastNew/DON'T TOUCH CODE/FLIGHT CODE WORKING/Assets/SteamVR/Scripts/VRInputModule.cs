@@ -17,6 +17,13 @@ public class VRInputModule : BaseInputModule
     public SteamVR_Action_Boolean m_FireAction;
     public SteamVR_Action_Boolean m_FlyAction;
 
+    //Sword Variables
+    private bool swordEquip = false;
+    public GameObject rightHand;
+    public GameObject sword;
+    public Vector3 swordPosition;
+    public Quaternion swordRotation;
+
     //Data Variables
     private GameObject m_CurrentObject = null;
     private GameObject m_LazerHit = null;
@@ -44,6 +51,11 @@ public class VRInputModule : BaseInputModule
         
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
+
+        sword.SetActive(false);
+        sword.transform.SetParent(rightHand.transform);
+        sword.transform.position = swordPosition;
+        sword.transform.rotation = swordRotation;
     }
 
     public override void Process()
@@ -74,6 +86,13 @@ public class VRInputModule : BaseInputModule
             {
                 Destroy(m_CurrentObject);
             }
+        }
+
+        //Equip Sword
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            if (swordEquip == false) sword.SetActive(true);
+            else sword.SetActive(false);
         }
 
         //Fire
