@@ -35,7 +35,7 @@ public class VRInputModule : BaseInputModule
     public Transform gunEnd;
 
     //Bullet Variables
-    public float bulletSpeed = 10.0f;
+    public float bulletSpeed = 200.0f;
     public Rigidbody bullet;
 
     protected override void Awake()
@@ -44,6 +44,11 @@ public class VRInputModule : BaseInputModule
         
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
+    }
+
+    private void Update()
+    {
+        
     }
 
     public override void Process()
@@ -62,6 +67,18 @@ public class VRInputModule : BaseInputModule
 
         //Hover
         HandlePointerExitAndEnter(m_Data, m_CurrentObject);
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            nextFire = Time.time + fireRate;
+
+            ProcessFireBullet();
+
+            if (m_CurrentObject != null)
+            {
+                Destroy(m_CurrentObject);
+            }
+        }
 
         //Fire
         if (m_FireAction.GetStateDown(m_FireSource) && Time.time > nextFire)
@@ -121,7 +138,7 @@ public class VRInputModule : BaseInputModule
 
         if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange))
         {
-            Debug.Log("That's a hit!");
+            //Debug.Log("That's a hit!");
 
             lazerLine.SetPosition(1, hit.point);
 

@@ -8,6 +8,6 @@ public class Bullet : MonoBehaviour {
 
     void Awake()
     {
-        Destroy(gameObject, lifetime);
+        if (gameObject.tag != "SaveMe") Destroy(gameObject, lifetime);
     }
 }
