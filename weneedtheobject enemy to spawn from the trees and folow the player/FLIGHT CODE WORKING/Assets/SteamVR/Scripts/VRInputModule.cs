@@ -26,12 +26,12 @@ public class VRInputModule : BaseInputModule
     public float moveSpeed = 0.25f;
 
     //Lazer Variables
-    public float fireRate = 0.25f;
+    //public float fireRate = 0.25f;
     public float weaponRange = 50.0f;
     public float hitForce = 100.0f;
     private WaitForSeconds shotDuraction = new WaitForSeconds(0.07f);
     private LineRenderer lazerLine;
-    private float nextFire;
+    //private float nextFire;
     public Transform gunEnd;
 
     //Bullet Variables
@@ -48,7 +48,15 @@ public class VRInputModule : BaseInputModule
 
     private void Update()
     {
-        
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ProcessFire();
+
+            if (m_CurrentObject != null)
+            {
+                Destroy(m_CurrentObject);
+            }
+        }
     }
 
     public override void Process()
@@ -68,22 +76,10 @@ public class VRInputModule : BaseInputModule
         //Hover
         HandlePointerExitAndEnter(m_Data, m_CurrentObject);
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            nextFire = Time.time + fireRate;
-
-            ProcessFireBullet();
-
-            if (m_CurrentObject != null)
-            {
-                Destroy(m_CurrentObject);
-            }
-        }
-
         //Fire
-        if (m_FireAction.GetStateDown(m_FireSource) && Time.time > nextFire)
+        if (m_FireAction.GetState(m_FireSource)) //&& Time.time > nextFire)
         {
-            nextFire = Time.time + fireRate;
+            //nextFire = Time.time + fireRate;
 
             ProcessFire();
 
