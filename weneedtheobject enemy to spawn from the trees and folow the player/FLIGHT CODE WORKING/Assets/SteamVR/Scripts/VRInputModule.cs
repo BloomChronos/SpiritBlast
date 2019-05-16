@@ -49,7 +49,10 @@ public class VRInputModule : BaseInputModule
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        lazerLine.SetPosition(0, gunEnd.position);
+        ProcessFire();
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             ProcessFire();
 
