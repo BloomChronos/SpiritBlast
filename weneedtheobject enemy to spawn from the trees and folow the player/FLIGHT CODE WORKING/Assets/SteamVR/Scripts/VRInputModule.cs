@@ -27,6 +27,7 @@ public class VRInputModule : BaseInputModule
 
     //Lazer Variables
     //public float fireRate = 0.25f;
+    public LayerMask lazerMask;
     public float weaponRange = 50.0f;
     public float hitForce = 100.0f;
     private WaitForSeconds shotDuraction = new WaitForSeconds(0.07f);
@@ -132,7 +133,7 @@ public class VRInputModule : BaseInputModule
 
         lazerLine.SetPosition(0, gunEnd.position);
 
-        if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange))
+        if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange, lazerMask))
         {
             //Debug.Log("That's a hit!");
 
