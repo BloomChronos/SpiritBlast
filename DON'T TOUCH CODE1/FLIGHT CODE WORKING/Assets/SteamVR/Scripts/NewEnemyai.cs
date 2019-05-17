@@ -25,7 +25,7 @@ public class NewEnemyai : MonoBehaviour
 
     public void Follow(GameObject Targ) //Follows the target(Typically the player
     {
-         float step =  speed * Time.deltaTime; // calculate distance to move
+        float step =  speed * Time.deltaTime; // calculate distance to move
         transform.position = Vector3.MoveTowards(transform.position, Targ.transform.position, step);
         //Vector3 Direction = Targ.transform.position - gameObject.transform.position;
         transform.LookAt(Targ.transform);
