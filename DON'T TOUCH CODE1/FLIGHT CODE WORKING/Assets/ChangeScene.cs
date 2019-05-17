@@ -7,13 +7,18 @@ public class ChangeScene : MonoBehaviour {
 
     // Use this for initialization
 
-    public void OnCollision(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
+
+
+        Debug.Log("Collide");
         if(collision.gameObject.tag == "SaveMe")
         {
-            SceneManager.LoadScene("MichellesMaze", LoadSceneMode.Additive); 
 
-
+            Debug.Log("Hit!");
+            //SceneManager.LoadScene("MichellesMaze", LoadSceneMode.Single);
+            SceneManager.LoadScene("michaelssparklelevel", LoadSceneMode.Single);
+            
         }
 
 
