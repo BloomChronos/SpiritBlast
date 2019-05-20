@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
 <<<<<<< HEAD
+<<<<<<< HEAD
   - enabled: 1
     path: Assets/SpiritBlasts/JalenScene.unity
     guid: 5fea4e3dcfffbc1489720b5e00fa59a3
   - enabled: 1
     path: Assets/SpiritBlasts/michaelsspraklelevel.unity
     guid: 07d2af61b6cfef54e914f04736ba9146
+=======
+>>>>>>> parent of e4bf85a... L
 =======
 >>>>>>> parent of e4bf85a... L
   m_configObjects: {}
