@@ -34,6 +34,14 @@ public class VRInputModule : BaseInputModule
     private float nextFire;
     public Transform gunEnd;
 
+    //New Laser Variables
+    public GameObject laserObject;
+    private bool laserOn;
+    public Camera cam;
+    public GameObject firePoint;
+    public LineRenderer lr;
+    public float maximumLength;
+
     //Bullet Variables
     public float bulletSpeed = 10.0f;
     public Rigidbody bullet;
@@ -44,6 +52,20 @@ public class VRInputModule : BaseInputModule
         
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
+    }
+
+    void Update()
+    {
+        //Fire
+        if(Input.GetKey(KeyCode.Space) && laserOn == false)
+        {
+            GameObject currentLaser = Instantiate(laserObject);
+            laserOn = true;
+        }
+        else if (Input.GetKey(KeyCode.Space) && laserOn == true)
+        {
+            //Update laser position
+        }
     }
 
     public override void Process()
