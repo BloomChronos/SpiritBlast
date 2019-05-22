@@ -26,25 +26,10 @@ public class VRInputModule : BaseInputModule
     public float moveSpeed = 0.25f;
 
     //Lazer Variables
-    public float fireRate = 0.25f;
     public float weaponRange = 50.0f;
-    public float hitForce = 100.0f;
     private WaitForSeconds shotDuraction = new WaitForSeconds(0.07f);
     private LineRenderer lazerLine;
-    private float nextFire;
     public Transform gunEnd;
-
-    //New Laser Variables
-    public GameObject laserObject;
-    private bool laserOn;
-    public Camera cam;
-    public GameObject firePoint;
-    public LineRenderer lr;
-    public float maximumLength;
-
-    //Bullet Variables
-    public float bulletSpeed = 10.0f;
-    public Rigidbody bullet;
 
     protected override void Awake()
     {
@@ -56,15 +41,14 @@ public class VRInputModule : BaseInputModule
 
     void Update()
     {
-        //Fire
-        if(Input.GetKey(KeyCode.Space) && laserOn == false)
+        if (m_FlyAction.GetState(m_FireSource))
         {
-            GameObject currentLaser = Instantiate(laserObject);
-            laserOn = true;
+            lazerLine.enabled = true;
+            ProcessFire();
         }
-        else if (Input.GetKey(KeyCode.Space) && laserOn == true)
+        else
         {
-            //Update laser position
+            lazerLine.enabled = false;
         }
     }
 
@@ -86,22 +70,22 @@ public class VRInputModule : BaseInputModule
         HandlePointerExitAndEnter(m_Data, m_CurrentObject);
 
         //Fire
-        if (m_FireAction.GetStateDown(m_FireSource) && Time.time > nextFire)
-        {
-            nextFire = Time.time + fireRate;
-
-            ProcessFire();
-
-            if(m_CurrentObject != null)
-            {
-                Destroy(m_CurrentObject);
-            }
-        }
+        //if (m_FireAction.GetStateDown(m_FireSource) && Time.time > nextFire)
+        //{
+        //    nextFire = Time.time + fireRate;
+        //
+        //    ProcessFire();
+        //
+        //    if(m_CurrentObject != null)
+        //    {
+        //        Destroy(m_CurrentObject);
+        //    }
+        //}
 
         //Controller Fly
         if (m_FlyAction.GetState(m_FlySource))
         {
-            Debug.Log("Foward!");
+            //Debug.Log("Foward!");
             Quaternion orientation = player.transform.rotation;
             Vector3 moveDirection = orientation * Vector3.forward;
             Vector3 rigPos = camRig.transform.position;
@@ -118,15 +102,6 @@ public class VRInputModule : BaseInputModule
             ProcessRelease(m_Data);
     }
 
-    private IEnumerator ShotEffect()
-    {
-        lazerLine.enabled = true;
-
-        yield return shotDuraction;
-
-        lazerLine.enabled = false;
-    }
-
     public PointerEventData GetData()
     {
         return m_Data;
@@ -134,16 +109,13 @@ public class VRInputModule : BaseInputModule
 
     void ProcessFire()
     {
-        //Debug.Log("Firing lazer!");
-        StartCoroutine(ShotEffect());
-
         RaycastHit hit;
 
         lazerLine.SetPosition(0, gunEnd.position);
 
-        if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange))
+        if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange) && hit.transform.gameObject.tag != "SaveMe")
         {
-            Debug.Log("That's a hit!");
+            //Debug.Log("That's a hit!");
 
             lazerLine.SetPosition(1, hit.point);
 
@@ -155,15 +127,6 @@ public class VRInputModule : BaseInputModule
         {
             lazerLine.SetPosition(1, gunEnd.position + (gunEnd.forward * weaponRange));
         }
-    }
-
-    void ProcessFireBullet()
-    {
-        //Create Bullet Object
-        Rigidbody bulletClone = (Rigidbody)Instantiate(bullet, gunEnd.position, gunEnd.rotation);
-
-        //Fire the bullet forward
-        bulletClone.velocity = gunEnd.forward * bulletSpeed;
     }
 
     private void ProcessPress(PointerEventData data)
