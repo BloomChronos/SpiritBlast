@@ -34,6 +34,7 @@ public class VRInputModule : BaseInputModule
     public GameObject newEnemy;
     public float lazerDelay = 60.0f;
     private float lazerTimer;
+    private ParticleSystem myParticle;
 
     protected override void Awake()
     {
@@ -42,17 +43,20 @@ public class VRInputModule : BaseInputModule
         lazerTimer = lazerDelay;
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
+        myParticle = GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
-        if (m_FlyAction.GetState(m_FireSource))
+        if (m_FlyAction.GetState(m_FireSource) || Input.GetKey(KeyCode.Space))
         {
             lazerLine.enabled = true;
+            myParticle.Play();
             ProcessFire();
         }
         else
         {
+            myParticle.Stop();
             lazerLine.enabled = false;
         }
         lazerTimer--;
