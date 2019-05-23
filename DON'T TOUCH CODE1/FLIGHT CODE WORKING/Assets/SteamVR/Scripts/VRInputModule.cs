@@ -30,11 +30,16 @@ public class VRInputModule : BaseInputModule
     private WaitForSeconds shotDuraction = new WaitForSeconds(0.07f);
     private LineRenderer lazerLine;
     public Transform gunEnd;
+    public GameObject newFriend;
+    public GameObject newEnemy;
+    public float lazerDelay = 60.0f;
+    private float lazerTimer;
 
     protected override void Awake()
     {
         base.Awake();
-        
+
+        lazerTimer = lazerDelay;
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
     }
@@ -50,6 +55,7 @@ public class VRInputModule : BaseInputModule
         {
             lazerLine.enabled = false;
         }
+        lazerTimer--;
     }
 
     public override void Process()
@@ -68,19 +74,6 @@ public class VRInputModule : BaseInputModule
 
         //Hover
         HandlePointerExitAndEnter(m_Data, m_CurrentObject);
-
-        //Fire
-        //if (m_FireAction.GetStateDown(m_FireSource) && Time.time > nextFire)
-        //{
-        //    nextFire = Time.time + fireRate;
-        //
-        //    ProcessFire();
-        //
-        //    if(m_CurrentObject != null)
-        //    {
-        //        Destroy(m_CurrentObject);
-        //    }
-        //}
 
         //Controller Fly
         if (m_FlyAction.GetState(m_FlySource))
@@ -113,7 +106,7 @@ public class VRInputModule : BaseInputModule
 
         lazerLine.SetPosition(0, gunEnd.position);
 
-        if(Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange) && hit.transform.gameObject.tag != "SaveMe")
+        if (Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange) && hit.transform.gameObject.tag != "SaveMe")
         {
             //Debug.Log("That's a hit!");
 
@@ -121,7 +114,21 @@ public class VRInputModule : BaseInputModule
 
             m_LazerHit = hit.transform.gameObject;
 
-            if(m_LazerHit.tag != "SaveMe") Destroy(m_LazerHit);
+            if (m_LazerHit.tag == "fullPower" && lazerTimer <= 0)
+            {
+                Transform holdPosition = m_LazerHit.transform;
+                Destroy(m_LazerHit);
+                GameObject brandNew = (GameObject)Instantiate(newEnemy, holdPosition.position, holdPosition.rotation);
+                lazerTimer = lazerDelay;
+            }
+
+            if (m_LazerHit.tag == "almostThere" && lazerTimer <= 0)
+            {
+                Transform holdPosition = m_LazerHit.transform;
+                Destroy(m_LazerHit);
+                GameObject brandNew = (GameObject)Instantiate(newFriend, holdPosition.position, holdPosition.rotation);
+                lazerTimer = lazerDelay;
+            }
         }
         else
         {
@@ -156,7 +163,7 @@ public class VRInputModule : BaseInputModule
         GameObject pointerUpHandler = ExecuteEvents.GetEventHandler<IPointerClickHandler>(m_CurrentObject);
 
         //Check if actual
-        if(data.pointerPress == pointerUpHandler)
+        if (data.pointerPress == pointerUpHandler)
         {
             ExecuteEvents.Execute(data.pointerPress, data, ExecuteEvents.pointerUpHandler);
         }
