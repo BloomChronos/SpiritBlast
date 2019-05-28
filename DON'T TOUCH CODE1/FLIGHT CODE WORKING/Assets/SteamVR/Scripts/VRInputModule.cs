@@ -35,6 +35,14 @@ public class VRInputModule : BaseInputModule
     public float lazerDelay = 60.0f;
     private float lazerTimer;
     private ParticleSystem myParticle;
+    private float lazerDistanceStretchSpeed = 1.0f;
+    private float currWeaponRange = 0.0f;
+
+    protected override void Start()
+    {
+        myParticle = GetComponent<ParticleSystem>();
+        myParticle.Stop();
+    }
 
     protected override void Awake()
     {
@@ -43,21 +51,27 @@ public class VRInputModule : BaseInputModule
         lazerTimer = lazerDelay;
         m_Data = new PointerEventData(eventSystem);
         lazerLine = GetComponent<LineRenderer>();
-        myParticle = GetComponent<ParticleSystem>();
     }
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+
+            myParticle.Emit(1);
+            Debug.Log("Trying to Fire");
+        }
         if (m_FlyAction.GetState(m_FireSource) || Input.GetKey(KeyCode.Space))
         {
             lazerLine.enabled = true;
-            myParticle.Play();
+            myParticle.Emit(1);
             ProcessFire();
         }
-        else
+        else if(Input.GetKeyUp(KeyCode.Space))
         {
             myParticle.Stop();
             lazerLine.enabled = false;
+            currWeaponRange = 0.0f;
         }
         lazerTimer--;
     }
@@ -110,7 +124,7 @@ public class VRInputModule : BaseInputModule
 
         lazerLine.SetPosition(0, gunEnd.position);
 
-        if (Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, weaponRange) && hit.transform.gameObject.tag != "SaveMe")
+        if (Physics.Raycast(gunEnd.position, gunEnd.forward, out hit, currWeaponRange) && hit.transform.gameObject.tag != "SaveMe")
         {
             //Debug.Log("That's a hit!");
 
@@ -136,7 +150,15 @@ public class VRInputModule : BaseInputModule
         }
         else
         {
-            lazerLine.SetPosition(1, gunEnd.position + (gunEnd.forward * weaponRange));
+            if(currWeaponRange < weaponRange)
+            {
+                currWeaponRange += lazerDistanceStretchSpeed;
+                lazerLine.SetPosition(1, gunEnd.position + (gunEnd.forward * currWeaponRange));
+            }
+            else
+            {
+                lazerLine.SetPosition(1, gunEnd.position + (gunEnd.forward * weaponRange));
+            }
         }
     }
 
