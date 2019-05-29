@@ -67,7 +67,7 @@ public class VRInputModule : BaseInputModule
             myParticle.Emit(1);
             ProcessFire();
         }
-        else if(Input.GetKeyUp(KeyCode.Space))
+        else if(Input.GetKeyUp(KeyCode.Space) || m_FlyAction.GetStateUp(m_FireSource))
         {
             myParticle.Stop();
             lazerLine.enabled = false;
